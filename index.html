@@ -1,6 +1,9 @@
 <html>
 	<head>
 		<title>PEM content formatting</title>
+		<meta name="description" content="Format or Convert Certificate content">
+		<meta name="keywords" content="format,convert,formatting,pem,certificate,key,keys,private">
+		<meta name="author" content="ChAliUzair">
 		<style>
 			#certificateInput{
 				font-family: "Courier New", Courier, monospace;
@@ -8,6 +11,9 @@
 		</style>
 	</head>
 	<body>
+		<a href="https://github.com/ChAliUzair/PEM-certificate-formattting">Visit github.com respoisitory</a>
+		<br/>
+		<br/>
 		<textarea rows="15" cols="100" id="certificateInput" placeholder="Enter certificate">
 -----BEGIN CERTIFICATE-----
 MIIEqDCCA5CgAwIBAgIRAJgT9HUT5XULQ+dDHpceRL0wDQYJKoZIhvcNAQELBQAw
@@ -15,10 +21,10 @@ PzEkMCIGA1UEChMbRGlnaXRhbCBTaWduYXR1cmUgVHJ1c3QgQ28uMRcwFQYDVQQD
 Ew5EU1QgUm9vdCBDQSBYMzAeFw0xNTEwMTkyMjMzMzZaFw0yMDEwMTkyMjMzMzZa
 MEoxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MSMwIQYDVQQD
 ExpMZXQncyBFbmNyeXB0IEF1dGhvcml0eSBYMTCCASIwDQYJKoZIhvcNAQEBBQAD
-v0J20/FyWo5ppnfjL78S2k4s2GLRJ7iD9ZDKErndvbNFGcsW+9kKK/TnY21hp4Dd
+v0J20FyWo5ppnfjL78S2k4s2GLRJ7iD9ZDKErndvbNFGcsW+9kKKTnY21hp4Dd
 ITv8S9ZYQ7oaoqs7HwhEMY9sibED4aXw09xrJZTC9zK1uIfW6t5dHQjuOWv+HHoW
-ZnupyxpsEUlEaFb+/SCI4KCSBdAsYxAcsHYI5xxEI4LutHp6s3OT2FuO90WfdsIk
-6q78OMSdn875bNjdBYAqxUp2/LEIHfDBkLoQz0hFJmwAbYahqKaLn73PAAm1X2kj
+ZnupyxpsEUlEaFb+SCI4KCSBdAsYxAcsHYI5xxEI4LutHp6s3OT2FuO90WfdsIk
+6q78OMSdn875bNjdBYAqxUp2LEIHfDBkLoQz0hFJmwAbYahqKaLn73PAAm1X2kj
 f1w8DdnkabOLGeOVcj9LQ+s67vBykx4anTjURkbqZslUEUsn2k5xeua2zUk=
 -----END CERTIFICATE-----
 		</textarea>
@@ -65,12 +71,12 @@ f1w8DdnkabOLGeOVcj9LQ+s67vBykx4anTjURkbqZslUEUsn2k5xeua2zUk=
 				return certificate;
 			};
 			function beautyBtnClick(){
-				var output = beautifyCertificate(document.getElementById("certificateInput").innerHTML);
-				document.getElementById("certificateInput").innerHTML = output;
+				var output = beautifyCertificate(document.getElementById("certificateInput").value);
+				document.getElementById("certificateInput").value = output;
 			}
 			function uglifyBtnClick(){
-				var output = uglifyCertificate(document.getElementById("certificateInput").innerHTML);
-				document.getElementById("certificateInput").innerHTML = output;
+				var output = uglifyCertificate(document.getElementById("certificateInput").value);
+				document.getElementById("certificateInput").value = output;
 			}
 		</script>
 	</body>
