@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<title>PEM content formatting</title>
+		<style>
+			#certificateInput{
+				font-family: "Courier New", Courier, monospace;
+			}
+		</style>
+	</head>
+	<body>
+		<textarea rows="15" cols="100" id="certificateInput" placeholder="Enter certificate">
+-----BEGIN CERTIFICATE-----
+MIIEqDCCA5CgAwIBAgIRAJgT9HUT5XULQ+dDHpceRL0wDQYJKoZIhvcNAQELBQAw
+PzEkMCIGA1UEChMbRGlnaXRhbCBTaWduYXR1cmUgVHJ1c3QgQ28uMRcwFQYDVQQD
+Ew5EU1QgUm9vdCBDQSBYMzAeFw0xNTEwMTkyMjMzMzZaFw0yMDEwMTkyMjMzMzZa
+MEoxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MSMwIQYDVQQD
+ExpMZXQncyBFbmNyeXB0IEF1dGhvcml0eSBYMTCCASIwDQYJKoZIhvcNAQEBBQAD
+v0J20/FyWo5ppnfjL78S2k4s2GLRJ7iD9ZDKErndvbNFGcsW+9kKK/TnY21hp4Dd
+ITv8S9ZYQ7oaoqs7HwhEMY9sibED4aXw09xrJZTC9zK1uIfW6t5dHQjuOWv+HHoW
+ZnupyxpsEUlEaFb+/SCI4KCSBdAsYxAcsHYI5xxEI4LutHp6s3OT2FuO90WfdsIk
+6q78OMSdn875bNjdBYAqxUp2/LEIHfDBkLoQz0hFJmwAbYahqKaLn73PAAm1X2kj
+f1w8DdnkabOLGeOVcj9LQ+s67vBykx4anTjURkbqZslUEUsn2k5xeua2zUk=
+-----END CERTIFICATE-----
+		</textarea>
+		<br/>
+		<button onclick="beautyBtnClick()">Beautify</button>
+		<button onclick="uglifyBtnClick()">Uglify</button>
+		<script>
+			function beautifyCertificate (certificate) {
+        // removing certicate's existing header & footer for proper alignment
+        certificate = certificate.replace(/-----BEGIN CERTIFICATE-----/g, "");
+        certificate = certificate.replace(/-----END CERTIFICATE-----/g, "");
+
+        // removing linebreaks
+        certificate = certificate.replace(/\r?\n|\r/g, "");
+
+        // add new line after every 64 characters
+        certificate = certificate.replace(/(.{64})/g, "$1\n");
+
+        // adding header
+        if (certificate.indexOf("-----BEGIN CERTIFICATE-----") == -1) {
+					certificate = "-----BEGIN CERTIFICATE-----\n" + certificate;
+        }
+
+        // adding footer
+        if (certificate.indexOf("-----END CERTIFICATE-----") == -1) {
+					certificate = certificate + "\n-----END CERTIFICATE-----";
+        }
+        return certificate;
+			};
+			
+			function uglifyCertificate (certificate) {
+				// removinglinebreaks
+				certificate = certificate.replace(/\r?\n|\r/g, "");
+
+				// removing header
+				if (certificate.indexOf("-----BEGIN CERTIFICATE-----") > -1) {
+					certificate = certificate.substr("-----BEGIN CERTIFICATE-----".length, certificate.length);
+				}
+
+				// removing footer
+				if (certificate.indexOf("-----END CERTIFICATE-----") > -1) {
+					certificate = certificate.substr(0, certificate.indexOf("-----END CERTIFICATE-----"));
+				}
+				return certificate;
+			};
+			function beautyBtnClick(){
+				var output = beautifyCertificate(document.getElementById("certificateInput").innerHTML);
+				document.getElementById("certificateInput").innerHTML = output;
+			}
+			function uglifyBtnClick(){
+				var output = uglifyCertificate(document.getElementById("certificateInput").innerHTML);
+				document.getElementById("certificateInput").innerHTML = output;
+			}
+		</script>
+	</body>
+</html>
